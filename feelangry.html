@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When You Feel Angry</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #001f3f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #f7f7f7;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .verse-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            width: 80%;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            margin-bottom: 20px;
+        }
+
+        .verse-container p {
+            font-size: 1.8rem;
+            color: #ffd700;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+            margin: 10px 0;
+        }
+
+        .surah {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .generate-button {
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: black;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .generate-button:hover {
+            background-color: #ffcc00;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>When You Feel Angry</h1>
+        <div class="verse-container" id="verse-container">
+            <p id="verse-arabic">الآية العربية هنا</p>
+            <p id="verse-english">English verse translation here</p>
+            <div class="surah" id="surah-info">Surah Name, Ayah Number</div>
+        </div>
+        <button class="generate-button" onclick="generateRandomVerse()">Generate Another Verse</button>
+    </div>
+
+    <script>
+        const verses = [
+            {
+                arabic: "وَٱلۡكَٰظِمِينَ ٱلۡغَيۡظَ وَٱلۡعَافِينَ عَنِ ٱلنَّاسِۗ وَٱللَّهُ يُحِبُّ ٱلۡمُحۡسِنِينَ",
+                english: "Those who restrain anger and pardon all men—Allah loves those who do good.",
+                surah: "Surah Al-Imran, Ayah 134"
+            },
+            {
+                arabic: "وَإِذَا مَا غَضِبُواْ هُمۡ يَغۡفِرُونَ",
+                english: "And when they are angry, they forgive.",
+                surah: "Surah Ash-Shura, Ayah 37"
+            },
+            {
+                arabic: "فَٱصۡفَحِ ٱلصَّفۡحَ ٱلۡجَمِيلَ",
+                english: "So overlook (their faults) with gracious forgiveness.",
+                surah: "Surah Al-Hijr, Ayah 85"
+            },
+            {
+                arabic: "وَلَا تَسۡتَوِي ٱلۡحَسَنَةُ وَلَا ٱلسَّيِّئَةُۚ ٱدۡفَعۡ بِٱلَّتِي هِيَ أَحۡسَنُ",
+                english: "Good and evil are not equal. Repel evil with good.",
+                surah: "Surah Fussilat, Ayah 34"
+            },
+            {
+                arabic: "قُل لِّعِبَادِي يَقُولُواْ ٱلَّتِي هِيَ أَحۡسَنُۚ إِنَّ ٱلشَّيۡطَٰنَ يَنزَغُ بَيۡنَهُمۡ",
+                english: "Tell My servants to say that which is best. Surely, Satan sows discord among them.",
+                surah: "Surah Al-Isra, Ayah 53"
+            },
+            {
+                arabic: "يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُواْ ٱتَّقُواْ ٱللَّهَ وَقُولُواْ قَوۡلٗا سَدِيدٗا",
+                english: "O you who believe! Fear Allah and speak words of appropriate justice.",
+                surah: "Surah Al-Ahzab, Ayah 70"
+            },
+            {
+                arabic: "وَٱصۡبِرۡ وَمَا صَبۡرُكَ إِلَّا بِٱللَّهِ",
+                english: "And be patient, and your patience is not but through Allah.",
+                surah: "Surah An-Nahl, Ayah 127"
+            },
+            {
+                arabic: "وَلَمَن صَبَرَ وَغَفَرَ إِنَّ ذَٰلِكَ لَمِنۡ عَزۡمِ ٱلۡأُمُورِ",
+                english: "And whoever is patient and forgives - indeed, that is of the matters [worthy] of resolve.",
+                surah: "Surah Ash-Shura, Ayah 43"
+            },
+            {
+                arabic: "وَلَا تَسۡتَعۡجِلۡ لَهُمۡۚ إِنَّمَا نَعُدُّ لَهُمۡ عَدّٗا",
+                english: "So be not impatient over them. We only count out [to] them a limited number.",
+                surah: "Surah Maryam, Ayah 84"
+            },
+            {
+                arabic: "فَصَبۡرٞ جَمِيلٞۖ وَٱللَّهُ ٱلۡمُسۡتَعَانُ عَلَىٰ مَا تَصِفُونَ",
+                english: "So patience is most fitting. And Allah is the one sought for help against that which you describe.",
+                surah: "Surah Yusuf, Ayah 18"
+            },
+            {
+                arabic: "إِنَّهُۥ مَن يَتَّقِ وَيَصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ",
+                english: "Indeed, he who fears Allah and is patient, then indeed, Allah does not allow to be lost the reward of those who do good.",
+                surah: "Surah Yusuf, Ayah 90"
+            },
+            {
+                arabic: "وَٱلصَّـٰبِرِينَ فِي ٱلۡبَأۡسَآءِ وَٱلضَّرَّآءِ وَحِينَ ٱلۡبَأۡسِۗ",
+                english: "And [they are] those who are patient in poverty and hardship and during battle.",
+                surah: "Surah Al-Baqarah, Ayah 177"
+            },
+            {
+                arabic: "إِنَّمَا يُوَفَّى ٱلصَّـٰبِرُونَ أَجۡرَهُم بِغَيۡرِ حِسَابٖ",
+                english: "Indeed, the patient will be given their reward without account.",
+                surah: "Surah Az-Zumar, Ayah 10"
+            },
+            {
+                arabic: "وَٱصۡبِرۡ فَإِنَّ ٱللَّهَ لَا يُضِيعُ أَجۡرَ ٱلۡمُحۡسِنِينَ",
+                english: "Be patient, for indeed, Allah does not allow to be lost the reward of those who do good.",
+                surah: "Surah Hud, Ayah 115"
+            },
+            {
+                arabic: "فَٱصۡبِرۡ عَلَىٰ مَا يَقُولُونَ وَسَبِّحۡ بِحَمۡدِ رَبِّكَ",
+                english: "So be patient over what they say and exalt [Allah] with praise of your Lord.",
+                surah: "Surah Qaf, Ayah 39"
+            },
+            {
+                arabic: "وَلَا تَكُ فِي ضَيۡقٖ مِّمَّا يَمۡكُرُونَ",
+                english: "And be not distressed by what they conspire.",
+                surah: "Surah An-Nahl, Ayah 127"
+            }
+        ];
+
+        function generateRandomVerse() {
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            const verse = verses[randomIndex];
+
+            document.getElementById('verse-arabic').innerText = verse.arabic;
+            document.getElementById('verse-english').innerText = verse.english;
+            document.getElementById('surah-info').innerText = verse.surah;
+        }
+    </script>
+
+</body>
+</html>
+

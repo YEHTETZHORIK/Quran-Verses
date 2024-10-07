@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When You Feel Safe</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #001f3f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #f7f7f7;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .verse-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            width: 80%;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            margin-bottom: 20px;
+        }
+
+        .verse-container p {
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.4);
+            margin: 10px 0;
+        }
+
+        .surah {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .generate-button {
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: black;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .generate-button:hover {
+            background-color: #ffcc00;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>When You Feel Safe</h1>
+        <div class="verse-container" id="verse-container">
+            <p id="verse-arabic">الآية العربية هنا</p>
+            <p id="verse-english">English verse translation here</p>
+            <div class="surah" id="surah-info">Surah Name, Ayah Number</div>
+        </div>
+        <button class="generate-button" onclick="generateRandomVerse()">Generate Another Verse</button>
+    </div>
+
+    <script>
+        const verses = [
+            {
+                arabic: "وَلَا تَحۡزَنُوا۟ وَلا تَحۡزَنُوا۟ عَلَيۡهِمۡ ۖ وَٱللَّهُ أَعۡلَمُ بِمَا يَكۡسِبُونَ",
+                english: "And do not grieve over them. And Allah is Knowing of what they do.",
+                surah: "Surah Al-Baqarah, Ayah 85"
+            },
+            {
+                arabic: "أَلَا إِنَّ أَوْلِيَآءَ ٱللَّهِ لَا خَوۡفٌ عَلَيۡهِمۡ وَلَا هُمۡ يَحۡزَنُونَ",
+                english: "Unquestionably, for the allies of Allah there will be no fear concerning them, nor will they grieve.",
+                surah: "Surah Yunus, Ayah 62"
+            },
+            {
+                arabic: "إِنَّ ٱلَّذِينَ قَالُواْ رَبُّنَا ٱللَّهُ ثُمَّ ٱسۡتَقَامُواْ تَتَنَزَّلُ عَلَيۡهِمُ ٱلْمَلَـٰئِكَةُ أَلَّا تَخَافُوا۟ وَلَا تَحۡزَنُوا۟",
+                english: "Indeed, those who have said, 'Our Lord is Allah' and then remained steadfast - the angels will descend upon them, [saying], 'Do not fear and do not grieve.'",
+                surah: "Surah Fussilat, Ayah 30"
+            },
+            {
+                arabic: "وَكَفَىٰ بِٱللَّهِ وَلِيًّۭا",
+                english: "And sufficient is Allah as a protector.",
+                surah: "Surah An-Nisa, Ayah 45"
+            },
+            {
+                arabic: "وَإِن كَانَتۡ كَبُرَتۡ عَلَيۡكَ مِصۡيَبَةٞ فَٱصۡبِرۡ",
+                english: "And if a calamity befalls you, be patient.",
+                surah: "Surah Al-Baqarah, Ayah 153"
+            },
+            {
+                arabic: "فَإِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا",
+                english: "Indeed, with hardship [will be] ease.",
+                surah: "Surah Ash-Sharh, Ayah 6"
+            },
+            {
+                arabic: "وَمَا مِن دَابَّةٖ فِي ٱلۡأَرۡضِ وَلَا طَائِرٖ يَطَيَّرُ بِجَنَاحَيۡهِ إِلَّا أُمَمٞ أَمۡثَالُكُمۡ",
+                english: "And there is no creature on earth, nor a bird that flies with its wings, except [that they are] communities like you.",
+                surah: "Surah Al-An’am, Ayah 38"
+            },
+            {
+                arabic: "إِنَّ رَبَّكَ ٱلۡحَكِيمُ ٱلۡعَلِيمُ",
+                english: "Indeed, your Lord is the Wise, the Knowing.",
+                surah: "Surah Al-Baqarah, Ayah 32"
+            },
+            {
+                arabic: "أَلَا تَحۡزَنۢ إِنَّ ٱللَّهَ مَعَنَا",
+                english: "Do not grieve; indeed, Allah is with us.",
+                surah: "Surah At-Tawbah, Ayah 40"
+            },
+            {
+                arabic: "فَإِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا",
+                english: "Indeed, with hardship [will be] ease.",
+                surah: "Surah Ash-Sharh, Ayah 6"
+            },
+            {
+                arabic: "وَكَفَىٰ بِٱللَّهِ وَلِيًّۭا",
+                english: "And sufficient is Allah as a protector.",
+                surah: "Surah An-Nisa, Ayah 45"
+            },
+            {
+                arabic: "وَأَفَوِّضُ أَمۡرِي إِلَى ٱللَّهِۖ إِنَّ ٱللَّهَ بَصِيرٞ بِٱلۡعِبَادِ",
+                english: "And I entrust my affair to Allah. Indeed, Allah is Seeing of the servants.",
+                surah: "Surah Ghafir, Ayah 44"
+            },
+            {
+                arabic: "إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُتَوَكِّلِينَ",
+                english: "Indeed, Allah loves those who rely [upon Him].",
+                surah: "Surah Al-Imran, Ayah 159"
+            },
+            {
+                arabic: "إِنَّ أَوۡلِيَآءَ ٱللَّهِ لَا خَوۡفٌ عَلَيۡهِمۡ وَلَا هُمۡ يَحۡزَنُونَ",
+                english: "Unquestionably, for the allies of Allah there will be no fear concerning them, nor will they grieve.",
+                surah: "Surah Yunus, Ayah 62"
+            },
+            {
+                arabic: "وَلَا تَحۡزَنُوا۟ عَلَيۡهِمۡ ۖ وَٱللَّهُ أَعۡلَمُ بِمَا يَكۡسِبُونَ",
+                english: "And do not grieve over them. And Allah is Knowing of what they do.",
+                surah: "Surah Al-Baqarah, Ayah 85"
+            },
+            {
+                arabic: "أَلَا تَحۡزَنُوا۟ وَلا تَحۡزَنُوا۟ عَلَيۡهِمۡ ۖ وَٱللَّهُ أَعۡلَمُ بِمَا يَكۡسِبُونَ",
+                english: "And do not grieve over them. And Allah is Knowing of what they do.",
+                surah: "Surah Al-Baqarah, Ayah 85"
+            },
+            {
+                arabic: "وَإِن كَانَتۡ كَبُرَتۡ عَلَيۡكَ مِصۡيَبَةٞ فَٱصۡبِرۡ",
+                english: "And if a calamity befalls you, be patient.",
+                surah: "Surah Al-Baqarah, Ayah 153"
+            },
+            {
+                arabic: "إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُتَوَكِّلِينَ",
+                english: "Indeed, Allah loves those who rely [upon Him].",
+                surah: "Surah Al-Imran, Ayah 159"
+            },
+            {
+                arabic: "أَلَا تَحۡزَنُوا۟ وَلا تَحۡزَنُوا۟ عَلَيۡهِمۡ ۖ وَٱللَّهُ أَعۡلَمُ بِمَا يَكۡسِبُونَ",
+                english: "And do not grieve over them. And Allah is Knowing of what they do.",
+                surah: "Surah Al-Baqarah, Ayah 85"
+            },
+            {
+                arabic: "أَلَا تَحۡزَنُوا۟ وَلا تَحۡزَنُوا۟ عَلَيۡهِمۡ ۖ وَٱللَّهُ أَعۡلَمُ بِمَا يَكۡسِبُونَ",
+                english: "And do not grieve over them. And Allah is Knowing of what they do.",
+                surah: "Surah Al-Baqarah, Ayah 85"
+            },
+        ];
+
+        function generateRandomVerse() {
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            const verse = verses[randomIndex];
+
+            document.getElementById('verse-arabic').innerText = verse.arabic;
+            document.getElementById('verse-english').innerText = verse.english;
+            document.getElementById('surah-info').innerText = verse.surah;
+        }
+    </script>
+
+</body>
+</html>

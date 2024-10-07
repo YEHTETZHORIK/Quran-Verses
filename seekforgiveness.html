@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When You Seek Forgiveness</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #001f3f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1280&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: #f7f7f7;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
+        }
+
+        .verse-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            width: 80%;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            margin-bottom: 20px;
+        }
+
+        .verse-container p {
+            font-size: 1.5rem;
+            color: #ffd700;
+            text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.4);
+            margin: 10px 0;
+        }
+
+        .surah {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .generate-button {
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: black;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .generate-button:hover {
+            background-color: #ffcc00;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>When You Seek Forgiveness</h1>
+        <div class="verse-container" id="verse-container">
+            <p id="verse-arabic">الآية العربية هنا</p>
+            <p id="verse-english">English verse translation here</p>
+            <div class="surah" id="surah-info">Surah Name, Ayah Number</div>
+        </div>
+        <button class="generate-button" onclick="generateRandomVerse()">Generate Another Verse</button>
+    </div>
+
+    <script>
+        const verses = [
+            {
+                arabic: "وَٱلَّذِينَ إِذَا فَعَلُوا۟ فَاحِشَةًۭ أَوۡ ظَلَمُوا۟ أَنفُسَهُمۡ ذَكَرُوا۟ ٱللَّهَ فَٱسۡتَغۡفَرُوا۟ لِذُنُوبِهِمۡ",
+                english: "And those who, when they commit an immorality or wrong themselves by [being in sin], remember Allah and seek forgiveness for their sins.",
+                surah: "Surah Al-Imran, Ayah 135"
+            },
+            {
+                arabic: "إِنَّمَا ٱلۡمُؤۡمِنُونَ ٱلَّذِينَ إِذَا ذُكِرَ ٱللَّهُ وَجِلَتۡ قُلُوبُهُمۡ وَإِذَا تُلِيَتۡ عَلَيۡهِمۡ ءَايَـٰتُهُ زَادَتۡهُمۡ إِيمَـٰنًۭا",
+                english: "Indeed, the believers are those who, when Allah is mentioned, their hearts become fearful, and when His verses are recited to them, it increases them in faith.",
+                surah: "Surah Al-Anfal, Ayah 2"
+            },
+            {
+                arabic: "وَأَنِ اسۡتَغۡفِرُوا۟ رَبَّكُمۡ ثُمَّ تُوبُوا۟ إِلَيۡهِ يُمَتِّعۡكُمۡ مَّتَاعًۭا حَسَنًۭا إِلَىٰ أَجَلٍۢ مُسَمًّى",
+                english: "And ask forgiveness of your Lord and repent to Him. He will make for you a good provision until an appointed time.",
+                surah: "Surah Hud, Ayah 3"
+            },
+            {
+                arabic: "إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُتَوَكِّلِينَ",
+                english: "Indeed, Allah loves those who rely [upon Him].",
+                surah: "Surah Al-Imran, Ayah 159"
+            },
+            {
+                arabic: "فَٱتَّقُوا۟ ٱللَّهَ وَٱبۡتَغُوا۟ إِلَيۡهِ ٱلۡوَسِيلَةَ وَجَـٰهِدُوا۟ فِي سَبِيلِهِۦ لَعَلَّكُمۡ تُفۡلِحُونَ",
+                english: "So fear Allah and seek the means of nearness to Him and strive in His cause that you may succeed.",
+                surah: "Surah Al-Ma'idah, Ayah 35"
+            },
+            {
+                arabic: "فَإِنَّهُۥ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥ",
+                english: "And whoever relies upon Allah - then He is sufficient for him.",
+                surah: "Surah At-Talaq, Ayah 3"
+            },
+            {
+                arabic: "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌۭ أُجِيبُ دَعۡوَةَ ٱلدَّاعِ إِذَا دَعَانِ",
+                english: "And when My servants ask you concerning Me, indeed I am near. I respond to the invocation of the supplicant when he calls upon Me.",
+                surah: "Surah Al-Baqarah, Ayah 186"
+            },
+            {
+                arabic: "وَٱلَّذِينَ إِذَا فَعَلُوا۟ فَاحِشَةًۭ أَوۡ ظَلَمُوا۟ أَنفُسَهُمۡ ذَكَرُوا۟ ٱللَّهَ فَٱسۡتَغۡفَرُوا۟ لِذُنُوبِهِمۡ",
+                english: "And those who, when they commit an immorality or wrong themselves by [being in sin], remember Allah and seek forgiveness for their sins.",
+                surah: "Surah Al-Imran, Ayah 135"
+            },
+            {
+                arabic: "وَإِن كَانَتۡ كَبُرَتۡ عَلَيۡكَ مِصۡيَبَةٞ فَٱصۡبِرۡ",
+                english: "And if a calamity befalls you, be patient.",
+                surah: "Surah Al-Baqarah, Ayah 153"
+            },
+            {
+                arabic: "فَٱنقَلَبُوا۟ بِنِعْمَةٖ مِّنَ ٱللَّهِ وَفَضۡلٖ ۖ لَم يَمۡسَسۡهُمۡ سُوٓءٞ",
+                english: "And they returned with favor from Allah and bounty, and no evil touched them.",
+                surah: "Surah Al-Imran, Ayah 174"
+            },
+            {
+                arabic: "وَأَنِ اسۡتَغۡفِرُوا۟ رَبَّكُمۡ ثُمَّ تُوبُوا۟ إِلَيۡهِ يُمَتِّعۡكُمۡ مَّتَاعًۭا حَسَنًۭا إِلَىٰ أَجَلٍۢ مُسَمًّى",
+                english: "And ask forgiveness of your Lord and repent to Him. He will make for you a good provision until an appointed time.",
+                surah: "Surah Hud, Ayah 3"
+            },
+            {
+                arabic: "فَإِنَّهُۥ وَمَن يَتَوَكَّلْ عَلَى ٱللَّهِ فَهُوَ حَسۡبُهُۥ",
+                english: "And whoever relies upon Allah - then He is sufficient for him.",
+                surah: "Surah At-Talaq, Ayah 3"
+            },
+            {
+                arabic: "إِنَّ ٱللَّهَ يُحِبُّ ٱلۡمُتَوَكِّلِينَ",
+                english: "Indeed, Allah loves those who rely [upon Him].",
+                surah: "Surah Al-Imran, Ayah 159"
+            },
+            {
+                arabic: "وَلَوۡ كَانَتۡ أَمَانَةًۭ أَوۡ دَيۡنًۭا أَن تَقُومُوا۟ بِهِۦ",
+                english: "And if you speak, be just, even if it concerns a near relative.",
+                surah: "Surah An-Nisa, Ayah 135"
+            },
+            {
+                arabic: "إِنَّ ٱللَّهَ يَأۡمُرُكُمۡ أَن تُؤَدُّوا۟ ٱلۡأَمَـٰنَـٰتِ إِلَى أَهۡلِهَا",
+                english: "Indeed, Allah commands you to render trusts to whom they are due.",
+                surah: "Surah An-Nisa, Ayah 58"
+            },
+            {
+                arabic: "فَٱذۡكُرُونِىٓ أَذۡكُرۡكُمۡ",
+                english: "So remember Me; I will remember you.",
+                surah: "Surah Al-Baqarah, Ayah 152"
+            },
+            {
+                arabic: "ٱلَّذِينَ إِن مَّسَّهُمۡ طَائِفٞ مِّنَ ٱلشَّيۡطَـٰنِ تَذَكَّرُوا۟ فَإِذَا هُمۡ مُبۡصِرُونَ",
+                english: "Those who, when an impulse from Satan touches them, remember Allah, and at once they have sight.",
+                surah: "Surah Al-A'raf, Ayah 201"
+            },
+            {
+                arabic: "وَٱسۡتَغۡفِرُوا۟ لِذَنبِكَ ۖ إِنَّهُۥ كَانَ تَوَّابًۭا",
+                english: "And ask forgiveness for your sin, indeed, it is ever forgiving.",
+                surah: "Surah Muhammad, Ayah 19"
+            },
+            {
+                arabic: "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌۭ أُجِيبُ دَعۡوَةَ ٱلدَّاعِ إِذَا دَعَانِ",
+                english: "And when My servants ask you concerning Me, indeed I am near. I respond to the invocation of the supplicant when he calls upon Me.",
+                surah: "Surah Al-Baqarah, Ayah 186"
+            },
+            {
+                arabic: "وَٱذۡكُرُوا۟ إِذَآ أَصَابَكُم مُّصِيبَةٞ فَصَبۡرُوا۟",
+                english: "And remember when a disaster strikes you, be patient.",
+                surah: "Surah Al-Baqarah, Ayah 153"
+            },
+            {
+                arabic: "وَأَنِ اسۡتَغۡفِرُوا۟ رَبَّكُمۡ ثُمَّ تُوبُوا۟ إِلَيۡهِ يُمَتِّعۡكُمۡ مَّتَاعًۭا حَسَنًۭا إِلَىٰ أَجَلٍۢ مُسَمًّى",
+                english: "And ask forgiveness of your Lord and repent to Him. He will make for you a good provision until an appointed time.",
+                surah: "Surah Hud, Ayah 3"
+            }
+        ];
+
+        function generateRandomVerse() {
+            const randomIndex = Math.floor(Math.random() * verses.length);
+            const verse = verses[randomIndex];
+
+            document.getElementById('verse-arabic').innerText = verse.arabic;
+            document.getElementById('verse-english').innerText = verse.english;
+            document.getElementById('surah-info').innerText = verse.surah;
+        }
+
+        // Generate a random verse on page load
+        window.onload = generateRandomVerse;
+    </script>
+</body>
+</html>
